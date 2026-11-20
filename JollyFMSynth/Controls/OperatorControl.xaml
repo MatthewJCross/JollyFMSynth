@@ -1,0 +1,49 @@
+<UserControl x:Class="JollyFMSynth.Controls.OperatorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:JollyFMSynth.Controls"
+             MinWidth="270" VerticalAlignment="Top">
+    <Border Style="{StaticResource OperatorPanelStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Grid.Row="0" Text="{Binding Title}" FontWeight="Bold" FontSize="17" Foreground="{StaticResource AccentBrush}" Margin="0,0,0,5"/>
+                <ComboBox ItemsSource="{Binding Waveforms}" SelectedItem="{Binding Waveform, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource ComboTextBrush}" Margin="6,0,6,6"/>
+                <ComboBox ItemsSource="{Binding FrequencyModes}" SelectedItem="{Binding FrequencyMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource ComboTextBrush}" Margin="0,0,0,6" ToolTip="Ratio follows the note; Fixed uses a constant frequency"/>
+            </StackPanel>
+            <UniformGrid Grid.Row="2" Columns="5" HorizontalAlignment="Stretch">
+                <controls:RotaryKnob Width="50" Height="66" Caption="RATIO" Minimum="0.1" Maximum="32" Step="0.05" DefaultValue="1" ValueFormat="F2" Value="{Binding Ratio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsRatioMode}"/>
+                <controls:RotaryKnob Width="50" Height="66" Caption="FIXED HZ" Minimum="1" Maximum="16000" Step="1" DefaultValue="440" ValueFormat="F0" Value="{Binding FixedFrequencyHz, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsFixedMode}"/>
+                <controls:RotaryKnob Width="50" Height="66" Caption="DETUNE" Minimum="-100" Maximum="100" Step="1" DefaultValue="0" ValueFormat="F0" Value="{Binding Detune, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <controls:RotaryKnob Width="50" Height="66" Caption="LEVEL" Minimum="0" Maximum="1" Step="0.01" DefaultValue="0" ValueFormat="P0" Value="{Binding Level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <controls:RotaryKnob x:Name="ModulationDepthKnob" Width="50" Height="66" Caption="FM DEPTH" Minimum="0" Maximum="1" Step="0.01" DefaultValue="0.5" Value="{Binding FmDepth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding HasOutgoingCables}" ToolTip="Modulation depth for all outgoing cables"/>
+            </UniformGrid>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="LFO" Foreground="{StaticResource AccentBrush}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <controls:RotaryKnob x:Name="LfoPitchKnob" x:FieldModifier="public" Width="50" Height="62" Caption="PITCH" Minimum="0" Maximum="1" Step="0.01" DefaultValue="{Binding LfoPitch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="0" ValueFormat="P0"/>
+                <controls:RotaryKnob x:Name="LfoAmpKnob" x:FieldModifier="public" Width="50" Height="62" Caption="AMP" Minimum="0" Maximum="1" Step="0.01" DefaultValue="{Binding LfoAmplitude, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="0" ValueFormat="P0"/>
+                <controls:RotaryKnob x:Name="LfoFmKnob" x:FieldModifier="public" Width="50" Height="62" Caption="FM" Minimum="0" Maximum="1" Step="0.01" DefaultValue="{Binding LfoFm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="0" ValueFormat="P0"/>
+            </StackPanel>
+            <TextBlock x:Name="ModulationTargetText" Grid.Row="3" Visibility="Collapsed" Text="FM: No outgoing cables" FontSize="10"
+                       Foreground="{StaticResource MutedTextBrush}" Margin="5,0,0,2"/>
+            <!-- Keep the sockets alongside the ADSR, rather than adding a row below it. -->
+            <Grid Grid.Row="4" Margin="0,2,0,0" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="36"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="36"/>
+                </Grid.ColumnDefinitions>
+                <controls:JackSocketControl x:Name="InputSocket" Grid.Column="0" SocketLabel="IN" Tag="{Binding Index}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <controls:AdsrPanel Grid.Column="1" Margin="0"/>
+                <controls:JackSocketControl x:Name="OutputSocket" Grid.Column="2" SocketLabel="OUT" Tag="{Binding Index}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

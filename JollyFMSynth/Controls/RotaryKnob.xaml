@@ -1,0 +1,15 @@
+<UserControl x:Class="JollyFMSynth.Controls.RotaryKnob"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             MinWidth="30" MinHeight="40" Focusable="True" Cursor="SizeNS">
+    <Viewbox Stretch="Uniform">
+        <Canvas Width="76" Height="94" Background="Transparent">
+            <Path x:Name="TrackArc" Stroke="#34475A" StrokeThickness="3.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+            <Path x:Name="ValueArc" Stroke="{StaticResource AccentBrush}" StrokeThickness="3.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+            <Ellipse Canvas.Left="16" Canvas.Top="6" Width="44" Height="44" Fill="{StaticResource ControlBackgroundBrush}" Stroke="#34475A" StrokeThickness="1"/>
+            <Line x:Name="Pointer" Stroke="{StaticResource AccentBrush}" StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+            <TextBlock x:Name="CaptionText" Canvas.Top="61" Width="76" TextAlignment="Center" FontFamily="Segoe UI" FontSize="11" Foreground="{StaticResource KnobTextBrush}"/>
+            <TextBlock x:Name="ValueText" Canvas.Top="77" Width="76" TextAlignment="Center" FontFamily="Segoe UI" FontSize="11" Foreground="{StaticResource AccentBrush}"/>
+        </Canvas>
+    </Viewbox>
+</UserControl>

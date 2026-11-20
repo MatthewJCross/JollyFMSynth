@@ -1,0 +1,14 @@
+<UserControl x:Class="JollyFMSynth.Controls.EffectsPanel" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:JollyFMSynth.Controls">
+    <Border Background="{StaticResource ControlBackgroundBrush}" BorderBrush="#34475B" BorderThickness="1" CornerRadius="6" Padding="6" Margin="0,0,0,5">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="FX" Foreground="{StaticResource AccentBrush}" FontWeight="Bold" VerticalAlignment="Top" Margin="4,0,12,0"/>
+            <controls:RotaryKnob x:Name="ChorusKnob" x:FieldModifier="public" Width="64" Height="66" Caption="CHORUS" Minimum="0" Maximum="1" Step="0.01" DefaultValue="0" ValueFormat="P0" Value="{Binding Chorus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="DelayKnob" x:FieldModifier="public" Width="64" Height="66" Caption="DELAY" Minimum="0" Maximum="1" Step="0.01" DefaultValue="0" ValueFormat="P0" Value="{Binding Delay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="TimeKnob" x:FieldModifier="public" Width="64" Height="66" Caption="TIME s" Minimum="0.05" Maximum="1.5" Step="0.01" DefaultValue="0.32" ValueFormat="F2" Value="{Binding DelaySeconds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="FeedbackKnob" x:FieldModifier="public" Width="64" Height="66" Caption="FEEDBACK" Minimum="0" Maximum="0.85" Step="0.01" DefaultValue="0.35" ValueFormat="P0" Value="{Binding Feedback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="ReverbKnob" x:FieldModifier="public" Width="64" Height="66" Caption="REVERB" Minimum="0" Maximum="1" Step="0.01" DefaultValue="0" ValueFormat="P0" Value="{Binding Reverb, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="FilterKnob" x:FieldModifier="public" Width="64" Height="66" Caption="LP FILTER" Minimum="0" Maximum="1" Step="0.01" DefaultValue="1" ValueFormat="P0" Value="{Binding Cutoff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="MasterKnob" x:FieldModifier="public" Width="64" Height="66" Caption="MASTER" Minimum="0" Maximum="1" Step="0.01" DefaultValue="0.8" ValueFormat="P0" Value="{Binding Master, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+    </Border>
+</UserControl>

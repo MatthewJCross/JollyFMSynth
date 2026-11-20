@@ -1,0 +1,47 @@
+<UserControl x:Class="JollyFMSynth.Controls.AdsrPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:JollyFMSynth.Controls"
+             MinWidth="220" DataContextChanged="OnDataContextChanged">
+    <Border Style="{StaticResource EnvelopePanelStyle}" Padding="5,4,5,2">
+        <StackPanel>
+            <TextBlock Text="AMPLITUDE ENVELOPE" Foreground="{StaticResource AccentBrush}" FontSize="10" FontWeight="SemiBold" Margin="3,0,0,2"/>
+            <Border Background="{StaticResource GraphBackgroundBrush}" CornerRadius="4" Margin="2,0,2,3" Height="68" ToolTip="Right-click to adjust Bézier tension">
+                <Border.ContextMenu>
+                    <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                        <MenuItem StaysOpenOnClick="True">
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Bézier tension" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <Slider Width="110" Minimum="0" Maximum="1" TickFrequency="0.01" Value="{Binding CurveTension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                    </ContextMenu>
+                </Border.ContextMenu>
+                <Viewbox Stretch="Fill">
+                    <Canvas Width="210" Height="68">
+                        <Line X1="5" Y1="63" X2="205" Y2="63" Stroke="{StaticResource BorderBrush}" StrokeThickness="1"/>
+                        <Polyline x:Name="EnvelopeLine" Stroke="{StaticResource AccentBrush}" StrokeThickness="2.5" StrokeLineJoin="Round"/>
+                    </Canvas>
+                </Viewbox>
+            </Border>
+            <!-- Curve selectors share the knob row, instead of consuming another row. -->
+            <UniformGrid Columns="4" Margin="0">
+                <Grid>
+                    <controls:RotaryKnob Width="45" Height="60" Caption="ATTACK" Minimum="0" Maximum="5" Step="0.01" DefaultValue="0.01" ValueFormat="F2" Value="{Binding Attack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Width="17" Height="17" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,0,0" ToolTip="Attack curve" ItemsSource="{Binding CurveTypes}" SelectedItem="{Binding AttackCurveType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid>
+                    <controls:RotaryKnob Width="45" Height="60" Caption="DECAY" Minimum="0" Maximum="5" Step="0.01" DefaultValue="0.2" ValueFormat="F2" Value="{Binding Decay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Width="17" Height="17" HorizontalAlignment="Right" VerticalAlignment="Top" ToolTip="Decay curve" ItemsSource="{Binding CurveTypes}" SelectedItem="{Binding DecayCurveType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <controls:RotaryKnob Width="45" Height="60" Caption="SUSTAIN" Minimum="0" Maximum="1" Step="0.01" DefaultValue="0.7" ValueFormat="P0" Value="{Binding Sustain, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid>
+                    <controls:RotaryKnob Width="45" Height="60" Caption="RELEASE" Minimum="0" Maximum="5" Step="0.01" DefaultValue="0.3" ValueFormat="F2" Value="{Binding Release, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Width="17" Height="17" HorizontalAlignment="Right" VerticalAlignment="Top" ToolTip="Release curve" ItemsSource="{Binding CurveTypes}" SelectedItem="{Binding ReleaseCurveType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+</UserControl>

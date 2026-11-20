@@ -1,0 +1,13 @@
+<UserControl x:Class="JollyFMSynth.Controls.LfoPanel" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:JollyFMSynth.Controls">
+    <Border Background="{StaticResource ControlBackgroundBrush}" BorderBrush="#34475B" BorderThickness="1" CornerRadius="6" Padding="6" Margin="0,0,0,5">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="LFO" Foreground="{StaticResource AccentBrush}" FontWeight="Bold" VerticalAlignment="Top" Margin="4,0,12,0"/>
+            <ComboBox x:Name="WaveformPicker" x:FieldModifier="public" Width="17" Height="17" VerticalAlignment="Top" Margin="0,0,10,0" SelectedItem="{Binding Waveform, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="RateKnob" x:FieldModifier="public" Width="55" Height="66" Caption="RATE Hz" Minimum="0.05" Maximum="30" Step="0.05" DefaultValue="5" ValueFormat="F2" Value="{Binding Rate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="PitchKnob" x:FieldModifier="public" Width="55" Height="66" Caption="PITCH ¢" Minimum="0" Maximum="100" Step="1" DefaultValue="0" ValueFormat="F0" Value="{Binding Pitch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="AmplitudeKnob" x:FieldModifier="public" Width="55" Height="66" Caption="AMP" Minimum="0" Maximum="1" Step="0.01" DefaultValue="0" ValueFormat="P0" Value="{Binding Amplitude, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="DelayKnob" x:FieldModifier="public" Width="55" Height="66" Caption="DELAY s" Minimum="0" Maximum="10" Step="0.05" DefaultValue="0" ValueFormat="F2" Value="{Binding Delay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:RotaryKnob x:Name="FadeKnob" x:FieldModifier="public" Width="55" Height="66" Caption="FADE s" Minimum="0" Maximum="10" Step="0.05" DefaultValue="0" ValueFormat="F2" Value="{Binding Fade, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+    </Border>
+</UserControl>
